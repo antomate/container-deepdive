@@ -1,3 +1,3 @@
-# antomateHome
+# Docker Container Deepdive
 
-Web homepage with terminal style UI, based on teletype.js script from keyvank (https://github.com/keyvank/teletype.js)
+Docker container deep dive presentation and labs 
