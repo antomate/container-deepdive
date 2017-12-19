@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <title>Antomate console</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="From graphic designer to Ops to wannabe Dev, from Windows to Linux and OSS, I'm a cloud and DevOps enthusiast!">
+    <link rel="stylesheet" href="style.css">
+    <script src="script/teletype.js"></script>
+  </head>
+  <body>
+    <div id="frame" style="width: 647px; height: 539px">
+      <div id="window" style="width: 647px; height: 454px">
+        <table>
+          <tr>
+            <td style="width: 5px; height: 25px"></td>
+            <td><img alt=" " src="images/cloud.png"  style="width: 37px; height: 25px"></td>
+            <td style="width: 518px; height: 25px;"></td>
+            <td><img alt=" " src="images/min.png"  style="width: 26px; height: 25px"></td>
+            <td><img alt=" " src="images/max.png"  style="width: 27px; height: 25px"></td>
+            <td><img alt=" " src="images/close.png"  style="width: 29px; height: 25px"></td>
+            <td style="width: 5px; height: 25px;"></td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <td style="width: 5px; height: 424px;"></td>
+            <td id="consolecell" style="width: 637px; height: 424px">
+              <div id="console">
+                <script>
+                  var element = document.getElementById('console');
+                  var tty = new teletype(element, function(str) {});
+                  tty.printText('> ','font-weight:bold;color:#8ae237');
+                  tty.printText('Tell-Joke\n','',{wait:2000,delay:70});
+                  tty.printText('A computer is not funny, ask your f*****g "smartphone"\n','',{wait:300,delay:0});
+                  tty.printText('But I can look on Internet for something funny\n');
+                  tty.printText('> ','font-weight:bold;color:#8ae237');
+                  tty.printText('\n','',{wait:1000,delay:70});
+                  tty.printText('> ','font-weight:bold;color:#8ae237');
+                  tty.printText('Get-stupidImage\n','',{wait:2000,delay:70});
+                  tty.printText("\n",'',{wait:300,delay:0});
+                  tty.printHTML('<img alt=" " src="images/dinocat.gif" style="width: 400px; height: 267px"><br><br>');
+                  // tty.printHTML('<img alt=" " src="images/dinolazer.gif"><br><br>');
+                  tty.printText('> ','font-weight:bold;color:#8ae237');
+                </script>
+            </div>
+            </td>
+            <td style="width: 5px; height: 424px;"></td>
+          </tr>
+        </table>
+        <div style="width: 647px; height: 5px;"></div>
+      </div>
+    </div>
+  </body>
+</html>

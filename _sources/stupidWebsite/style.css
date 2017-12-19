@@ -1,0 +1,64 @@
+html,body,div,span,img,table,caption,tbody,tfoot,thead,tr,th,td,footer,header {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:top;
+    background:transparent;
+    align-content:center;
+    border-width: 0px;
+    border-collapse: collapse;
+}
+body {
+    background: #404040;
+}
+h1,h2,h3,h4,h5,h6,p,a,blockquote {
+    font-family: monospace;
+    font-size: 13px;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+    color: #FFFFFF;
+    font-weight: 400;
+    text-decoration: none;
+    font-style: normal;
+    font-variant: normal;
+    text-transform: none;
+}
+#frame {
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+}
+#window {
+    border-radius: 7px;
+    -webkit-border-radius: 7px;
+    background-color: #7f7f7f;
+}
+#consolecell {
+    background-color: #404040;
+}
+#console {
+    overflow:hidden;
+    background-color:#404040;
+    color:white;
+    font-size:13px;
+    font-family: monospace;
+    margin: 5px;
+}
+#console a, #console a:visited {
+    text-decoration: underline;
+}
+@keyframes flicker {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+#console::after{
+    content: '_';
+    animation-duration: 0.8s;
+    animation-name: flicker;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}

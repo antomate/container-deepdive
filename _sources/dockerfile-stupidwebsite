@@ -1,0 +1,21 @@
+# Select the image from which to build the new one
+FROM microsoft/iis
+
+# Name/contact of maintainer
+MAINTAINER antomate, github.com/antomate
+
+# Image label
+LABEL Description="stupide website"
+
+# Create website homefolder and configure new IIS website
+RUN mkdir C:\stupidewebsite \
+  && powershell -NoProfile -Command \
+      Import-module IISAdministration; \
+      New-IISSite -Name "Site" -PhysicalPath C:\stupidewebsite -BindingInformation "*:8080:"
+
+# Replace home page included in the parent image by a new one
+RUN powershell remove-item \inetpub\wwwroot\iisstart.* \
+  && powershell wget https://raw.githubusercontent.com/anton1d/Docker-Compose_Demo/master/websrc/Microsoft-Ninja-Cat.gif -outfile C:\inetpub\wwwroot\Microsoft-Ninja-Cat.gif
+
+# Port exposed by the containers
+EXPOSE 8080
