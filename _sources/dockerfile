@@ -1,0 +1,15 @@
+# Select the image from which to build the new one
+FROM microsoft/iis
+
+# Image label
+LABEL Description="stupid website"
+LABEL Maintainer="antomate @ GitHub"
+
+# Copy localstupidWebsite content to the IIS root folder
+COPY stupidWebsite \inetpub\wwwroot
+
+# Remove home page included in the parent
+RUN powershell remove-item \inetpub\wwwroot\iisstart.*
+
+# Port exposed by the containers (override parent image setting if any)
+EXPOSE 80

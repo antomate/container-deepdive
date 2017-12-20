@@ -1,3 +1,6 @@
+# The following steps are required for the labs
+# They need to be performed on Windows Server 2016 (Core or Full Desktop)
+
 # Install Docker
 Install-Module DockerProvider -Force
 Install-Package Docker -ProviderName DockerProvider -Force
@@ -16,7 +19,7 @@ $newPath = "$env:ProgramFiles\docker;" +
 dockerd --register-service
 Start-Service docker
 
-# Configure Docker
+# Configure Docker when installed manually
 new-item -Type File c:\ProgramData\docker\config\daemon.json
 Add-Content 'c:\programdata\docker\config\daemon.json' '{ "hosts": ["tcp://0.0.0.0:2375", "npipe://"] }'
 Restart-Service docker
@@ -29,7 +32,7 @@ Invoke-WebRequest -UseBasicParsing -OutFile vscode.zip "https://az764295.vo.msec
 Expand-Archive vscode.zip -DestinationPath $Env:ProgramFiles\VSCode
 Remove-Item -Force vscode.zip
 
-# Pull des base image OS
+# Pull base OS image
 Docker images pull microsoft/windowsservercore
 Docker images pull microsoft/nanoserver
 Docker images pull microsoft/iis

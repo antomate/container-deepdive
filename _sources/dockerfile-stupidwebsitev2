@@ -1,0 +1,21 @@
+# Do a multistep build 
+# 1. making C:\stupidewebsite directory + Replacing COPY instruction by downloading and extracting
+#    zip into C:\stupidewebsite
+# 2. Donwloading PS module IISAdministration + Removing default website
+#    + creating new website exposed on 80
+
+# Select the image from which to build the new one
+FROM microsoft/iis
+
+# Image label
+LABEL Description="stupid website"
+LABEL Maintainer="antomate @ GitHub"
+
+# Create website homefolder and configure new IIS website
+RUN mkdir C:\stupidewebsite \
+  && powershell -NoProfile -Command \
+      Import-module IISAdministration; \
+      New-IISSite -Name "Site" -PhysicalPath C:\stupidewebsite -BindingInformation "*:8080:"
+
+# Port exposed by the containers
+EXPOSE 80
