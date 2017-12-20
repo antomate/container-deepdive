@@ -5,11 +5,13 @@ FROM microsoft/iis
 LABEL Description="stupid website"
 LABEL Maintainer="antomate @ GitHub"
 
-# Copy localstupidWebsite content to the IIS root folder
-COPY stupidWebsite \inetpub\wwwroot
+# Create website homefolder and configure new IIS website
+RUN mkdir C:\stupidewebsite \
+  && powershell -NoProfile -Command \
+      Import-module IISAdministration; \
+      New-IISSite -Name "Site" -PhysicalPath C:\stupidewebsite -BindingInformation "*:8080:"
 
-# Remove home page included in the parent
-RUN powershell remove-item \inetpub\wwwroot\iisstart.*
+ADD stupidWebsite/ /stupidewebsite
 
 # Port exposed by the containers (override parent image setting if any)
-EXPOSE 80
+EXPOSE 8080

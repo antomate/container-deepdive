@@ -1,12 +1,12 @@
 # Download lab content from GitHub
-wget https://github.com/antomate/container-deepdive/archive/master.zip -UseBasicParsing -OutFile C:\temp\master.zip
+New-Item -Type Directory C:\temp
+Invoke-WebRequest https://github.com/antomate/container-deepdive/archive/master.zip -UseBasicParsing -OutFile C:\temp\master.zip
 Expand-Archive C:\temp\master.zip -DestinationPath C:\temp
-set-location C:\temp\container-deepdive-master\_sources
+Set-Location C:\temp\container-deepdive-master\_sources
 Remove-Item -Force C:\temp\master.zip
 
-===============================================================
 # Inspect dockerfile for official IIS image
-wget https://raw.githubusercontent.com/Microsoft/Virtualization-Documentation/master/windows-container-samples/windowsservercore/iis/Dockerfile | write-host
+Invoke-WebRequest https://raw.githubusercontent.com/Microsoft/iis-docker/master/windowsservercore-ltsc2016/Dockerfile | write-host
 
 # Inspect dockerfile for the custom image build from IIS
 Get-Content dockerfile
@@ -20,9 +20,11 @@ docker images
 # Run the new image
 docker run -d --name demostupid -p 80:80 antomate/stupidwebsite
 
+# launch website
+Start-Process iexplore.exe -ArgumentList "http://localhost:8080/"
+
 # Upload new image to the registry
-docker push antonind/ninjacat
+docker push antomate/stupidwebsite
 
 # Clean up the demo
-docker stop demostupid
-docker rm demostupid
+docker rm demostupid -f

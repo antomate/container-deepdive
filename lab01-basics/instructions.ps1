@@ -1,37 +1,50 @@
-# Inspect docker components
-get-childitem $Env:ProgramFiles\docker
+# Inspect docker components, see both client and daemon
+Get-Childitem $Env:ProgramFiles\docker
 
-# Open a new PowerShell window
-start-process powershell
+# Open a new PowerShell window dedicated to run a first container in interactive mode
+# The entrypoint/command specified for this container is PowerShell
+Start-Process powershell -ArgumentList "docker container run -it microsoft/windowsservercore powershell"
 
-# first container run in interactive mode with a entrypoint/command specified (PowerShell)
-docker container run -it microsoft/windowsservercore powershell
+# list running containers
+docker container ps
 
-# Inspect and compare process tree inside and outside container (in the separate Powershell window)
-Get-Process | Sort-Object -Property Id -Descending
+# Inspect and compare PID tree inside and outside container
+# (run the command in the two window)
+Get-Process | Sort-Object -Property ProcessName
 
-# Inspect and compare ProgrameFiles folder inside and outside container (in the separate Powershell window)
-get-childitem $Env:ProgramFiles
+# Spot the LSASS process and compare their PID inside and outside container
+# (run the command in the two window)
+Get-Process -Name lsass
 
-# Remove system folder
-Remove-Item $Env:ProgramFiles
+# Inspect and compare ProgrameFiles folder inside and outside container
+# (run the command in the two window)
+Get-Childitem $Env:ProgramFiles
+
+# Remove system folder inside the container
+# (in the window with interactive session in the container)
+New-Item -Type Directory $Env:ProgramFiles\BANCO
 
 # Exit the container
+# (in the window with interactive session in the container)
 Exit
 
 # Start a new container from the same image
-docker container run -d microsoft/windowsservercore
+# Notepad as the entrypoint/command for the container not to stop
+docker container run -d microsoft/windowsservercore notepad
 
-# Exec into this container and witness the change did not persist
-get-childitem $Env:ProgramFiles
+# Exec inside this last launched container
+Start-Process powershell -ArgumentList "docker exec -it $(docker ps -l -q) powershell"
 
-# Inspect containers and the patrh structure of docker and running or stopped containers
-get-childitem $Env:ProgramData\docker
+# Witness the "BANCO" folder created previously did not persist
+# (in the window with interactive session in the container)
+Get-Childitem $Env:ProgramFiles
+
+# Inspect containers and the path structure of docker and running/stopped containers
+Get-Childitem $Env:ProgramData\docker
 docker container ps -a
-get-childitem $Env:ProgramData\docker\containers
+Get-Childitem $Env:ProgramData\docker\containers
 
 # Inspect images and the path structure of image layer
-get-childitem $Env:ProgramData\docker\windowsfilter
+Get-Childitem $Env:ProgramData\docker\windowsfilter
 docker images ps
-get-childitem $Env:ProgramData\docker\windowsfilter\<imageID>\Files
-get-childitem $Env:ProgramData\docker\windowsfilter\<imageID>\Hives
+Get-Childitem $Env:ProgramData\docker\windowsfilter\<imageID>\Hives
