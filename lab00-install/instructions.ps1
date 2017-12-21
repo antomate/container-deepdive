@@ -26,9 +26,9 @@ Expand-Archive vscode.zip -DestinationPath $Env:ProgramFiles\VSCode
 Remove-Item -Force vscode.zip
 
 # Pull base OS image
-Docker images pull microsoft/windowsservercore
-Docker images pull microsoft/nanoserver
-Docker images pull microsoft/iis
+Docker image pull microsoft/windowsservercore
+Docker image pull microsoft/nanoserver
+Docker image pull microsoft/iis
 
 # ========================================================================
 # Install Docker alternate way

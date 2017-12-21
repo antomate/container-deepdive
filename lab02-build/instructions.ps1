@@ -18,10 +18,13 @@ docker build -t antomate/stupidwebsite .
 docker images
 
 # Run the new image
-docker run -d --name demostupid -p 80:80 antomate/stupidwebsite
+docker run -d --name demostupid -p 8080:8080 antomate/stupidwebsite
+
+# Get IP address of the running container
+$demostupidIP = docker inspect -f "{{ .NetworkSettings.Networks.nat.IPAddress }}" demostupid
 
 # launch website
-Start-Process iexplore.exe -ArgumentList "http://localhost:8080/"
+Start-Process iexplore.exe -ArgumentList "http://$($demostupidIP):8080/"
 
 # Upload new image to the registry
 docker push antomate/stupidwebsite
