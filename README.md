@@ -72,3 +72,7 @@ EXPOSE 8080
 
 ENTRYPOINT ["C:\\ServiceMonitor.exe", "w3svc"]
 ```
+
+## Lifecycle
+
+![lifecycle](img/lifecycle.png)
