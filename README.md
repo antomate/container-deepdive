@@ -50,7 +50,7 @@ Common artefacts for dev and ops
 
 ## Automated build (based on DockerFile)
 
-![build](img/Build.png)
+![build](img/build.png)
 
 ```
 FROM microsoft/iis
